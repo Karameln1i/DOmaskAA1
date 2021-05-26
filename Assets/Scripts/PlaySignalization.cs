@@ -26,7 +26,6 @@ public class PlaySignalization : MonoBehaviour
            {
                StopCoroutine(ChangeVolumeJob);
                ChangeVolumeJob = StartCoroutine(ChangeVolume(Time.deltaTime * _volumeChangeRate,_minimumSoundValue));
-              Debug.Log("poc");
            }
        }
    }
