@@ -9,7 +9,7 @@ public class PlaySignalization : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _volumeChangeRate;
     
-   private Coroutine ChangeVolumeJob;
+   private Coroutine _changeVolumeJob;
    private float _maximumSoundValue=1F;
    private float _minimumSoundValue = 0F;
 
@@ -20,24 +20,22 @@ public class PlaySignalization : MonoBehaviour
            if (_audioSource.volume == 0F) 
            {
                _audioSource.Play();
-                ChangeVolumeJob = StartCoroutine(ChangeVolume(Time.deltaTime * _volumeChangeRate,_maximumSoundValue));
+                _changeVolumeJob = StartCoroutine(ChangeVolume(_maximumSoundValue));
            }
            else
            {
-               StopCoroutine(ChangeVolumeJob);
-               ChangeVolumeJob = StartCoroutine(ChangeVolume(Time.deltaTime * _volumeChangeRate,_minimumSoundValue));
-              Debug.Log("poc");
+               StopCoroutine(_changeVolumeJob);
+               _changeVolumeJob = StartCoroutine(ChangeVolume(_minimumSoundValue));
            }
        }
    }
    
-   private IEnumerator ChangeVolume(float volumeScale,float soundValue)
+   private IEnumerator ChangeVolume(float soundValue)
    {
        while (_audioSource.volume!=soundValue)
        {
-           _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, soundValue, volumeScale);
+           _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, soundValue, Time.deltaTime*_volumeChangeRate);
            yield return null;
        }
    }
-   
 }
