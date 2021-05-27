@@ -19,21 +19,13 @@ public class PlaySignalization : MonoBehaviour
        {
            if (_audioSource.volume == 0F) 
            {
-               _audioSource.Play();
-<<<<<<< HEAD
+               _audioSource.Play();           
                 _changeVolumeJob = StartCoroutine(ChangeVolume(_maximumSoundValue));
-=======
-                _changeVolumeJob = StartCoroutine(ChangeVolume(Time.deltaTime * _volumeChangeRate,_maximumSoundValue));
->>>>>>> 75f0f666de4ff80b54e559e71ec25c5b856a99fc
            }
            else
            {
                StopCoroutine(_changeVolumeJob);
-<<<<<<< HEAD
                _changeVolumeJob = StartCoroutine(ChangeVolume(_minimumSoundValue));
-=======
-               _changeVolumeJob = StartCoroutine(ChangeVolume(Time.deltaTime * _volumeChangeRate,_minimumSoundValue));
->>>>>>> 75f0f666de4ff80b54e559e71ec25c5b856a99fc
            }
        }
    }
